@@ -1,0 +1,265 @@
+:root {
+    --jllc--color--primary: #00599c;
+    --jllc--color--secondary: #00979c;
+}
+
+.jll-calendar {
+    width: fit-content;
+}
+
+.jll-calendar * {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.jll-calendar.style--float {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: #00000090;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6001;
+}
+
+.jll-calendar.style--float.style--show {
+    display: flex;
+}
+
+.jll-calendar__wrapper {
+    direction: rtl;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    margin: 0;
+    padding: 0.5rem;
+    border: 2px solid var(--jllc--color--primary);
+    border-radius: 0.5rem;
+    background-color: #fff;
+}
+
+.jll-calendar.style--float .jll-calendar__wrapper {
+    margin: 0 0.5rem;
+    border: none;
+}
+
+.jll-calendar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: var(--jllc--color--primary);
+    border-radius: 0.25rem;
+}
+
+.jll-calendar__header button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+}
+
+.jll-calendar__header .goto-previous-month ,
+.jll-calendar__header .goto-next-month {
+    color: var(--jllc--color--primary);
+    background-color: #fff;
+    border-radius: 0.25rem;
+}
+
+.jll-calendar__header .open-month-selector ,
+.jll-calendar__header .open-year-selector {
+    font-weight: bold;
+    color: #fff;
+    background-color: transparent;
+}
+
+.jll-calendar__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 0;
+}
+
+.jll-calendar__footer button {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.jll-calendar__footer .goto-today {
+    color: #fff;
+    background-color: var(--jllc--color--primary);
+}
+
+.jll-calendar__footer .float-close ,
+.jll-calendar__footer .float-clear {
+    display: none;
+    color: #333;
+    background-color: #ddd;
+    border-radius: 0.25rem;
+}
+
+.jll-calendar__footer .float-clear {
+    margin-left: 0.5rem;
+}
+
+.jll-calendar.style--float .float-close ,
+.jll-calendar.style--float .float-clear {
+    display: inline-block;
+}
+
+.jll-calendar__overlay {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    z-index: 1;
+}
+
+.jll-calendar.style--float .jll-calendar__overlay {
+    z-index: 6002;
+}
+
+.jll-calendar__overlay.style--show {
+    display: block;
+}
+
+.jll-calendar__overlay__top {
+    margin-bottom: 1rem;
+}
+
+.jll-calendar__overlay__top .close {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+    color: #333;
+    background-color: #ddd;
+    border-radius: 0.25rem;
+    border: none;
+    cursor: pointer;
+}
+
+.jll-calendar__overlay .options {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    overflow: auto;
+    max-height: calc(100% - 3rem);
+    padding-bottom: 0.25rem;
+}
+
+.jll-calendar__overlay .options button {
+    display: inline-block;
+    width: calc((100% - 1.5rem) / 3);
+    padding: 0.5rem 0;
+    color: var(--jllc--color--primary);
+    background-color: #fff;
+    border: 1px solid var(--jllc--color--primary);
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.jll-calendar__overlay .options button:hover {
+    color: #fff;
+    background-color: var(--jllc--color--primary);
+    border-color: var(--jllc--color--primary);
+}
+
+.jll-calendar__overlay .options button.active {
+    color: #fff;
+    background-color: var(--jllc--color--secondary);
+    border-color: var(--jllc--color--secondary);
+}
+
+.jll-calendar__day-names {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.jll-calendar__day-names > span {
+    display: block;
+    width: calc(100% / 7);
+    color: var(--jllc--color--primary);
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.jll-calendar__month-days {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.jll-calendar__month-days > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc((100% - 1.5rem) / 7);
+    min-height: 34px;
+    padding: 0.35rem 0.25rem;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--jllc--color--primary);
+    background-color: #fff;
+    border: 1px solid var(--jllc--color--primary);
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.jll-calendar__month-days > button.style--hidden {
+    visibility: hidden;
+}
+
+.jll-calendar__month-days > button:not(.style--locked, .style--today, .style--selected):hover {
+    background-color: #eee;
+}
+
+.jll-calendar__month-days > button.style--locked {
+    color: #555;
+    border-color: #555;
+    opacity: 0.5;
+}
+
+.jll-calendar__month-days > button.style--today {
+    color: #fff;
+    background-color: var(--jllc--color--primary);
+}
+
+.jll-calendar__month-days > button.style--holiday {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.jll-calendar__month-days > button.style--selected {
+    color: #fff;
+    background-color: var(--jllc--color--secondary);
+    border-color: var(--jllc--color--secondary);
+}

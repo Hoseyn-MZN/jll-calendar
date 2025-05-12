@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <title> Jll Calendar </title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.rtl.min.css" integrity="sha384-MdqCcafa5BLgxBDJ3d/4D292geNL64JyRtSGjEszRUQX9rhL1QkcnId+OT7Yw+D+" crossorigin="anonymous" />
+    
+    <link rel="stylesheet" href="jll-calendar/jll-calendar.css" />
+
+    <style>
+        :root {
+            --jllc--color--primary: #46007f;
+            --jllc--color--secondary: #bf6900;
+        }
+
+        .jll-calendar * {
+            font-family: system-ui;
+        }
+    </style>
+</head>
+
+<body class="container py-3">
+
+    <div class="text-center mb-2"> تقویم مستقل </div>
+
+    <div id="calendar-visible-container"></div>
+
+    <div class="d-flex gap-2 align-items-center justify-content-center mt-3">
+        <span> مقدار انتخاب شده : </span>
+        <input type="text" id="calendar-visible-value" class="form-control" style="direction: ltr; text-align: left; width: 200px;" />
+    </div>
+    
+    <hr />
+
+    <div class="mb-2"> متصل به Input </div>
+    <input type="text" class="form-control" data-jc-simple />
+    
+    <hr />
+
+    <div class="mb-2"> متصل به Input با مقدار وارد شده </div>
+    <input type="text" class="form-control" data-jc-simple-with-value value="1404/02/15" />
+
+    <hr />
+
+    <div class="mb-2"> محدودیت و بازه زمانی </div>
+
+    <div class="d-flex gap-3">
+        <input type="text" class="form-control" data-jc-range-min placeholder="از" />
+        <input type="text" class="form-control" data-jc-range-max placeholder="تا" />
+    </div>
+
+    <script src="jll-calendar/jll-calendar.js"></script>
+    <script>
+
+        new JllCalendar('jc-simple', { 
+            input : '[data-jc-simple]' ,
+        })
+
+        let xxx = new JllCalendar('jc-simple-with-value', { 
+            input : '[data-jc-simple-with-value]' ,
+            autoClose : false ,
+            outsideClose : true ,
+        })
+
+        let calendarRangeMin = new JllCalendar('jc-range-min', { 
+            input : '[data-jc-range-min]' ,
+            min : '1404/02/05' ,
+            max : '1404/02/25' ,
+        })
+
+        let calendarRangeMax = new JllCalendar('jc-range-max', { 
+            input : '[data-jc-range-max]' ,
+            min : '1404/02/05' ,
+            max : '1404/02/25' ,
+        })
+
+        let calendarVisible = new JllCalendar('jc-visible', { 
+            container : '#calendar-visible-container', 
+            cssClasses : 'mx-auto' ,
+            separator : '-'
+        })
+
+        calendarRangeMin.setOnClick(() => {
+            calendarRangeMax.setMin(calendarRangeMin.getValue())
+        })
+        
+        calendarRangeMax.setOnClick(() => {
+            calendarRangeMin.setMax(calendarRangeMax.getValue())
+        })
+        
+        calendarVisible.setOnClick(() => {
+            document.querySelector('#calendar-visible-value').value = calendarVisible.getValue()
+        })
+    </script>
+</body>
+
+</html>
